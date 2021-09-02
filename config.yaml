@@ -1,0 +1,117 @@
+baseURL: https://joseswonderfulwebsite.netlify.app/
+languageCode: en-us
+title: Welcome to Jose's Wonderful Website 
+theme: forty
+googleAnalytics: ''
+disqusShortname: ''
+params:
+  banner:
+    buttonText: Get Started
+    subtitle: |-
+      AN INCREDIBLE PLACE THAT WILL CHANGE YOUR PERCEPTION OF THE WEB
+    title: Hi, my name is Jose. It is my pleasure to have you here. 
+  blog: {}
+  contact:
+    address:
+      - city: London
+        country: United Kingdom
+        street: Homeless, fighting with agencies
+        title: Address
+    buttonClear: Clear
+    buttonSend: Send message
+    email:
+      - email: joseilaffitte@gmail.com
+        title: Email
+    enable: yes
+    phone:
+      - phone: +31 636406154
+        title: Phone
+  custom_css: []
+  custom_js: []
+  description: Your description
+  error404:
+    heading: Page couldn't be found
+    text: Please visit [this page](/)
+  favicon: favicon.ico
+  footer:
+    copyright: Me, myself, and I
+    enable: yes
+    quicklinks:
+      - alt: Super Cool
+        text: 'Design: '
+        url: https://www.google.com/search?q=cool+pictures&sxsrf=AOaemvJsHiViLUtucVaVoHMja3Ym2nHgBQ%3A1630507254187&ei=9pAvYZDgCtGagQbc9KL4DA&oq=cool+pictures&gs_lcp=Cgdnd3Mtd2l6EAMyBwgAELEDEEMyBQgAEIAEMgQIABBDMgUIABCABDIECAAQQzIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEOgcIIxCwAxAnOgcIABBHELADOgcIABCwAxBDSgUIPBIBMUoECEEYAVC5D1i5D2D4GGgBcAB4AIABTogBTpIBATGYAQCgAQHIAQ7AAQE&sclient=gws-wiz&ved=0ahUKEwiQs8HtgN7yAhVRTcAKHVy6CM8Q4dUDCA8&uact=5
+    social:
+      - icon: fa-twitter
+        label: Twitter
+        url: https://twitter.com/JoseLaffitte1
+     # - icon: fa-facebook
+      #  label: Facebook
+      #  url: https://www.facebook.com
+      - icon: fa-instagram
+        label: Instagram
+        url: https://www.instagram.com/laffitte.jose/
+      - icon: fa-github
+        label: GitHub
+        url: https://github.com/joseilaffitte
+      - icon: fa-linkedin
+        label: LinkedIn
+        url: https://www.linkedin.com/in/joseilaffitte/
+  image: ''
+  name: Your name
+  navigation:
+    button1:
+      - name: Get Started
+        url: blogs
+    button2:
+      - name: Log In
+        url: '#'
+    links:
+      - name: Home
+        url: '#'
+      - name: Blogs
+        url: blogs
+      - name: Generic Blog
+        url: blogs/ipsum
+      - name: Elements
+        url: elements.html
+    menu: Menu
+    subtitle: By HTML5 Up
+    title: Forty
+  tiles:
+    enable: yes
+    showcase:
+      - image: pic01.jpg
+        subtitle: A key component of any city's pipe system 
+        title: Sewer
+        url: blogs/aliquam
+      - image: pic02.jpg
+        subtitle: Water drops floating in the sky
+        title: Clouds
+        url: blogs/tempus
+      - image: pic03.jpg
+        subtitle: The place where we all live
+        title: Earth
+        url: blogs/magna
+      - image: pic04.jpg
+        subtitle: What we all are
+        title: Person
+        url: blogs/ipsum
+      - image: pic05.jpg
+        subtitle: It helps cars move
+        title: Wheel
+        url: blogs/ipsum
+      - image: pic06.jpg
+        subtitle: This is worth more than gold
+        title: Time
+        url: blogs/ipsum
+  two:
+    buttonText: Get Started
+    enable: yes
+    subtitle: "Nullam et orci eu lorem consequat tincidunt vivamus et sagittis libero.
+      \r\n    Mauris aliquet magna magna sed nunc rhoncus pharetra. \r\n    Pellentesque
+      condimentum sem. In efficitur ligula tate urna. Maecenas laoreet massa vel lacinia
+      pellentesque lorem ipsum dolor. \r\n    Nullam et orci eu lorem consequat tincidunt.
+      Vivamus et sagittis libero.\r\n    Mauris aliquet magna magna sed nunc rhoncus
+      amet pharetra et feugiat tempus."
+    title: Massa libero
+    url: blogs
