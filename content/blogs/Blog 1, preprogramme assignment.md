@@ -11,7 +11,7 @@ draft: false
 image: pic07.jpg
 keywords: ""
 slug: jose
-title: Aliquam
+title: About me
 ---
 
 ```{r load-libraries, warning=FALSE, message=FALSE, echo=FALSE}
