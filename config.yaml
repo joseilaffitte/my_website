@@ -81,9 +81,9 @@ params:
     enable: yes
     showcase:
       - image: pic01.jpg
-        subtitle: A key component of any city's pipe system 
-        title: Sewer
-        url: blogs/aliquam
+        subtitle: This is me, hello! 
+        title: This is me
+        url: blogs/jose
       - image: pic02.jpg
         subtitle: Water drops floating in the sky
         title: Clouds
@@ -115,3 +115,6 @@ params:
       amet pharetra et feugiat tempus."
     title: Massa libero
     url: blogs
+    
+    
+
