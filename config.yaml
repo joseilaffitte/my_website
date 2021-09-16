@@ -80,14 +80,14 @@ params:
   tiles:
     enable: yes
     showcase:
-      - image: me.jpg
+      - image: sevilla.jpg
         subtitle: This is me, hello! 
         title: This is me
         url: blogs/jose
       - image: pic02.jpg
-        subtitle: Water drops floating in the sky
-        title: Clouds
-        url: blogs/tempus
+        subtitle: Curious about my professional experience?
+        title: My CV
+        url: blogs/CV Jose.pdf
       - image: pic03.jpg
         subtitle: The place where we all live
         title: Earth

@@ -8,7 +8,7 @@ description: Nullam et orci eu lorem consdequat tincidunt vivamus et sagittis ma
   sed magna lacinia magna pelldfentesque lorem ipsum dolor. Nullam et orci eu lorem
   consequat tincidunt. Vivamus et sagittis tempus.
 draft: false
-image: pic07.jpg
+image: picjose.jpg
 keywords: ""
 slug: jose
 title: About me
