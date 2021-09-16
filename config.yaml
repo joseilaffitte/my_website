@@ -75,8 +75,8 @@ params:
       - name: Elements
         url: elements.html
     menu: Menu
-    subtitle: By HTML5 Up
-    title: Forty
+    subtitle: Welcome to my website
+    title: Jose's
   tiles:
     enable: yes
     showcase:
@@ -84,8 +84,8 @@ params:
         subtitle: This is me, hello! 
         title: This is me
         url: blogs/jose
-      - image: pic02.jpg
-        subtitle: Curious about my professional experience?
+      - image: handshake.jpg
+        subtitle: My professional experience
         title: My CV
         url: blogs/CV Jose.pdf
       - image: pic03.jpg
