@@ -80,7 +80,7 @@ params:
   tiles:
     enable: yes
     showcase:
-      - image: pic01.jpg
+      - image: me.jpg
         subtitle: This is me, hello! 
         title: This is me
         url: blogs/jose
