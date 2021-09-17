@@ -60,20 +60,20 @@ params:
   name: Your name
   navigation:
     button1:
-      - name: Get Started
+      - name: Learn More
         url: blogs
-    button2:
-      - name: Log In
-        url: '#'
+    #button2:
+     # - name: Log In
+     #   url: '#'
     links:
       - name: Home
         url: '#'
-      - name: Blogs
-        url: blogs
-      - name: Generic Blog
-        url: blogs/ipsum
-      - name: Elements
-        url: elements.html
+    #  - name: Blogs
+    #    url: blogs
+    #  - name: Generic Blog
+    #    url: blogs/ipsum
+    #  - name: Elements
+    #    url: elements.html
     menu: Menu
     subtitle: Welcome to my website
     title: Jose's
@@ -89,9 +89,9 @@ params:
         title: My CV
         url: blogs/CV Jose.pdf
       - image: pic03.jpg
-        subtitle: The place where we all live
-        title: Earth
-        url: blogs/magna
+        subtitle: We got a good grade, so might as well share it :)
+        title: Homework
+        url: blogs/homework
       - image: pic04.jpg
         subtitle: What we all are
         title: Person
@@ -105,15 +105,12 @@ params:
         title: Time
         url: blogs/ipsum
   two:
-    buttonText: Get Started
+    buttonText: Learn More
     enable: yes
-    subtitle: "Nullam et orci eu lorem consequat tincidunt vivamus et sagittis libero.
-      \r\n    Mauris aliquet magna magna sed nunc rhoncus pharetra. \r\n    Pellentesque
-      condimentum sem. In efficitur ligula tate urna. Maecenas laoreet massa vel lacinia
-      pellentesque lorem ipsum dolor. \r\n    Nullam et orci eu lorem consequat tincidunt.
-      Vivamus et sagittis libero.\r\n    Mauris aliquet magna magna sed nunc rhoncus
-      amet pharetra et feugiat tempus."
-    title: Massa libero
+    subtitle: "We are alive because we are in motion. I am a firm believer in challenge seeking 
+      \r\n    as a path for self development and growth. \r\n I also believe we should all strive to 
+      make a positive impact.\r\n    Thus, I aim to align my professional career with my values.\r\n"
+    title: What I stand for
     url: blogs
     
     
