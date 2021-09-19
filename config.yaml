@@ -93,9 +93,9 @@ params:
         title: Challenge Bikes
         url: blogs/challenge_bikes
       - image: pic04.jpg
-        subtitle: What we all are
-        title: Person
-        url: blogs/ipsum
+        subtitle: Do country accurately report their GDP?
+        title: GDP Accuracy Analysis
+        url: blogs/gdp
       - image: pic05.jpg
         subtitle: It helps cars move
         title: Wheel
