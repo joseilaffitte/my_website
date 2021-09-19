@@ -77,7 +77,7 @@ bike <- bike0 %>%
 We can easily create a facet grid that plots bikes hired by month and year.
 
 ```{r tfl_month_year_grid, out.width="100%"}
-knitr::include_graphics(here::here("images", "tfl_distributions_monthly.png"), error = FALSE)
+knitr::include_graphics(here::here("images", "tfl_monthly.png"))
 ```
 
 Look at May and Jun and compare 2020 with the previous years. What's happening?
