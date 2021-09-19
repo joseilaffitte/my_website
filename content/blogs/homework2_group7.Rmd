@@ -1,19 +1,11 @@
 ---
-title: "Look at this beautiful code"
+title: Look at this beautiful code
 date: '2017-10-31T22:42:51-05:00'
 description: Nullam et orci eu lorem consdequat tincidunt vivamus et sagittis magna
   sed nunc rhoncus condifdmentum vcvcsem. In efficitur ligula tate urna. Maecenas
   massa sed magna lacinia magna pelldfentesque lorem ipsum dolor. Nullam et orci eu
   lorem consequat tincidunt. Vivamus et sagittis tempus.
 draft: no
-output:
-  html_document:
-    theme: flatly
-    highlight: zenburn
-    number_sections: yes
-    toc: yes
-    toc_float: yes
-    code_folding: show
 image: picjose.jpg
 keywords: ''
 slug: homework
