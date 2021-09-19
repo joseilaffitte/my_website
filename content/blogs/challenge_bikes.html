@@ -17,19 +17,21 @@ categories:
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 
 
-<div id="challenge-1-excess-rentals-in-tfl-bike-sharing" class="section level1">
-<h1>Challenge 1: Excess rentals in TfL bike sharing</h1>
-<p>Recall the TfL data on how many bikes were hired every single day. We can get the latest data by running the following</p>
-<pre class="r"><code>url &lt;- &quot;https://data.london.gov.uk/download/number-bicycle-hires/ac29363e-e0cb-47cc-a97a-e216d900a6b0/tfl-daily-cycle-hires.xlsx&quot;
-library(disk.frame)
+<div id="excess-rentals-in-tfl-bike-sharing" class="section level1">
+<h1>Excess rentals in TfL bike sharing</h1>
+<p>The Santander Cycles is a public mobility scheme in the city of London. Its system allows you to temporarily rent a bike in any of the parking spots around the city, and it aims to increase the use of greener alternatives of transportation.</p>
+<p>The TfL (Transport for London) provides readily available data on dayly hires of the Santander Cycles. We can get the latest data by running the following script.</p>
+<pre class="r"><code># Saving URL
+url &lt;- &quot;https://data.london.gov.uk/download/number-bicycle-hires/ac29363e-e0cb-47cc-a97a-e216d900a6b0/tfl-daily-cycle-hires.xlsx&quot;
+
 # Download TFL data to temporary file
 httr::GET(url, write_disk(bike.temp &lt;- tempfile(fileext = &quot;.xlsx&quot;)))</code></pre>
-<pre><code>## Response [https://airdrive-secure.s3-eu-west-1.amazonaws.com/london/dataset/number-bicycle-hires/2021-08-23T14%3A32%3A29/tfl-daily-cycle-hires.xlsx?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAJJDIMAIVZJDICKHA%2F20210919%2Feu-west-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20210919T125441Z&amp;X-Amz-Expires=300&amp;X-Amz-Signature=850ecd10900898639f8b7c82c315cb9bb5057a17b58f1803c5ad7ea09bb2a615&amp;X-Amz-SignedHeaders=host]
-##   Date: 2021-09-19 12:54
+<pre><code>## Response [https://airdrive-secure.s3-eu-west-1.amazonaws.com/london/dataset/number-bicycle-hires/2021-08-23T14%3A32%3A29/tfl-daily-cycle-hires.xlsx?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAJJDIMAIVZJDICKHA%2F20210919%2Feu-west-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20210919T132942Z&amp;X-Amz-Expires=300&amp;X-Amz-Signature=5492e7636eaa8c1466b69788161393dd13ddee1e96a2b34acf9142ddce49b3fc&amp;X-Amz-SignedHeaders=host]
+##   Date: 2021-09-19 13:29
 ##   Status: 200
 ##   Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
 ##   Size: 173 kB
-## &lt;ON DISK&gt;  C:\Users\Usuario\AppData\Local\Temp\RtmpeUvdWr\file2fc423f33062.xlsx</code></pre>
+## &lt;ON DISK&gt;  C:\Users\Usuario\AppData\Local\Temp\Rtmpiyow5s\file1c30725029fa.xlsx</code></pre>
 <pre class="r"><code># Use read_excel to read it as dataframe
 bike0 &lt;- read_excel(bike.temp,
                    sheet = &quot;Data&quot;,
@@ -42,82 +44,133 @@ bike &lt;- bike0 %&gt;%
   mutate (year = year(day),
           month = lubridate::month(day, label = TRUE),
           week = isoweek(day))</code></pre>
-<p>We can easily create a facet grid that plots bikes hired by month and year.</p>
-<pre class="r"><code>knitr::include_graphics(here::here(&quot;images&quot;, &quot;tfl_monthly.png&quot;))</code></pre>
-<p><img src="C:/Users/Usuario/Desktop/my_website/images/tfl_monthly.png" width="100%" style="display: block; margin: auto;" /></p>
-<p>Look at May and Jun and compare 2020 with the previous years. What’s happening?</p>
-<blockquote>
-<p>It becomes clear that the effect of national restrictive measures such as lockdowns have greatly influenced the bikes rent. This helps us explain the difference between the average number of rented bikes in May and June 2020 with previous years.</p>
-</blockquote>
-<pre class="r"><code>actual_bike &lt;- bike %&gt;%
+<p>Due to the COVID-19 pandemic, the British government has been forced to take measures to prevent and reduce the spread of the virus, such as lockdowns. It is then interesting to investigate whether these restrictions have had any effect on the usage of the Santander Cycles.</p>
+<p>In order to answer our question, we need to plot the data and attempt to identify any pattern that might help us. The following code carefully explains how we can plot a graph which outputs the monthly average of Santander Cycles hired for the last 6 years, as well as the actual number of Santander Cycles hired per month each of these years.</p>
+<pre class="r"><code># We create a new dataframe to compute the actual number of bikes hired the last 6 years 
+actual_bike &lt;- bike %&gt;%
+               # filter for the past 6 years 
                filter (year &gt;= 2016) %&gt;%
+               # group by year and month
                group_by(year,month) %&gt;%
+               # calculate the daily mean of bikes hired per month, per year
                summarise(actual = mean(bikes_hired))
 
+# The expected dataframe relates to the overall average of daily bikes per month, over the last 6 years
 expected_bike &lt;- actual_bike %&gt;%
+                 # in this case we only group by month, since we want to include all                     years
                  group_by(month) %&gt;%
                  summarise(expected = mean(actual))
 
+
+# We create a new dataframe to compare the expected daily number of bikes hired per month (mean of last 6 years), and the actual average daily bikes hired per month per year
 comparison_bike &lt;- left_join(actual_bike, expected_bike, by = &quot;month&quot;)
 
-comparison_bike</code></pre>
-<pre><code>## # A tibble: 67 x 4
-## # Groups:   year [6]
-##     year month actual expected
-##    &lt;dbl&gt; &lt;ord&gt;  &lt;dbl&gt;    &lt;dbl&gt;
-##  1  2016 Jan   18914.   19763.
-##  2  2016 Feb   20608.   21433.
-##  3  2016 Mar   21435    22491.
-##  4  2016 Apr   25444.   27392.
-##  5  2016 May   32699.   33163.
-##  6  2016 Jun   32108.   36618.
-##  7  2016 Jul   38336.   37974.
-##  8  2016 Aug   37368.   34955.
-##  9  2016 Sep   35101.   33994.
-## 10  2016 Oct   30488.   29660.
-## # ... with 57 more rows</code></pre>
+# This shows the first 5 rows of the table
+head(comparison_bike)</code></pre>
+<pre><code>## # A tibble: 6 x 4
+## # Groups:   year [1]
+##    year month actual expected
+##   &lt;dbl&gt; &lt;ord&gt;  &lt;dbl&gt;    &lt;dbl&gt;
+## 1  2016 Jan   18914.   19763.
+## 2  2016 Feb   20608.   21433.
+## 3  2016 Mar   21435    22491.
+## 4  2016 Apr   25444.   27392.
+## 5  2016 May   32699.   33163.
+## 6  2016 Jun   32108.   36618.</code></pre>
+<p>Now that we have the data cleaned and with all the relevant information we need, we can plot our grapth to study the effect of lockdowns on bike rentals.</p>
 <pre class="r"><code>comparison_bike %&gt;%
+  # We select the month as the independent variable
   ggplot(aes(x = month, group = 1)) +
+  
+  # We create a black line plot with the actual average number of bikes hired
   geom_line(aes(x = month, y = actual), color = &quot;black&quot;, size = 0.1) +
+  
+  # We create a blue line plot with the total average number of bikes hired
   geom_line(aes(x = month, y = expected), color = &quot;blue&quot;, size = 0.8) +
+  
+  # We fill the gap between both lines
+  
+  # If the black (actual) line is below the blue (expected) line, it means that the number of bikes hired is below average. We fill this gap with red
   geom_ribbon(aes(ymin = expected, ymax = pmin(expected, actual)),fill = &quot;red&quot;, alpha=0.2)  +
+  
+  # If the black (actual) line is above the blue (expected) line, it means that the number of bikes hired is above average. We fill this gap with green
   geom_ribbon(aes(ymin = actual, ymax = pmin(expected, actual)),fill = &quot;green&quot;, alpha=0.2)+
+  
+  # We create a different plot for each year
   facet_wrap(~ year) +
+  
+  # We select a black and white background
   theme_bw()+
+  
+  # We adjust the labels
   labs(
     title= &quot;Montly changes in Tfl bikes rentals&quot;,
     y=&quot;bike rentals&quot;,
     x=&quot;Months&quot;
   )</code></pre>
 <p><img src="/blogs/challenge_bikes_files/figure-html/tfl_absolute_monthly_change-1.png" width="100%" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>actual_bike_w &lt;- bike %&gt;%
+<blockquote>
+<p>Is there then any effect caused by the lockdowns?</p>
+</blockquote>
+<p>It becomes clear that the effect of national restrictive measures such as lockdowns have greatly influenced the bikes rent. This helps us explain the difference between the average number of rented bikes in May and June 2020 with previous years.</p>
+<p>It is interesting then to understand what the percentage deviation from the expected number of bike rentals is, as it will help us better appreciate the effect of the measures. The following code explains how to plot this deviation, this time focusing on weekly averages.</p>
+<pre class="r"><code># Same as before, we select a new dataframe to calculate the average daily bikes for each week of each year. The process is the same as before, switching &#39;month&#39; by &#39;week&#39;
+actual_bike_w &lt;- bike %&gt;%
                filter (year &gt;= 2016) %&gt;%
                group_by(year, week) %&gt;%
                summarise(actual = mean(bikes_hired))
 
+# Same process as before to calculate the total weekly average over the years. Swith &#39;moth&#39; with &#39;week&#39; from the code of the previous exercise. 
 expected_bike_w &lt;- actual_bike_w %&gt;%
                  group_by(week) %&gt;%
                  summarise(expected = mean(actual))
 
+# We join both tables to have all the relevant information in one dataframe
 comparison_bike_w &lt;- left_join(actual_bike_w, expected_bike_w, by = &quot;week&quot;) %&gt;%
                      group_by(week) %&gt;%
+  
+                     # In addition, we create a new dchanges colum, which calculates                         the percentage deviation from the expected mean 
                      mutate(dchanges = (actual - expected) / expected )
 
+# After examining the dataframe, we realize there is a datapoint that is wrong. We received data from week 53 of 2021, which is in the future. We remove this datapoint.
 comparison_bike_w = comparison_bike_w %&gt;%
   filter(!(year ==2021 &amp; week ==53))</code></pre>
+<p>With our clean and organized dataframe, we can plot the graph using the code explained below.</p>
 <pre class="r"><code>comparison_bike_w %&gt;%
+  
+  # We select weeks as our independent variable
   ggplot(aes(x = week, group = 1)) +
+  
+  # We create a line plot with the percentage deviation. The baseline is y=0 is the       overall average, as it would signal a 0% deviation from the mean. 
   geom_line(aes(x = week, y = dchanges, fill = &quot;black&quot;)) +
+  
+  # We fill the gap between the baseline and the plotted line
+  
+  # If the line is below the baseline, we fill it red as it signals lower bikes hired.
   geom_ribbon(aes(ymin = 0, ymax = pmin(0, dchanges)),fill = &quot;red&quot;, alpha=0.2)  +
+  
+  # If the line is above baseline, we fill it green as it signals higher bikes hired.
   geom_ribbon(aes(ymin = dchanges, ymax = pmin(0, dchanges)),fill = &quot;green&quot;, alpha=0.2)+
+  
+  # We create different plots for each year
   facet_wrap(~ year) +
+  
+  # We select a black and white background
   theme_bw()+
+  
+  # We adjust the labels
   labs(
     title= &quot;Weekly changes in Tfl bikes rentals&quot;,
     y= &quot;Bikes rentals&quot;,
     x=&quot;Weeks&quot;
   )</code></pre>
 <p><img src="/blogs/challenge_bikes_files/figure-html/tfl_absolute_monthly_changemj-1.png" width="100%" style="display: block; margin: auto;" /></p>
-<p>Should you use the mean or the median to calculate your expected rentals? Why?
-&gt; In order to calculate the expected rentals we used the mean of rented bikes/montly since we thought this was a better measurement. Since the monthly data of the actual rented bikes does not seem to be heavily right/left skewed, the mean is a good tool to calcukate the expected rentals. If the data were heavily skewed, we would have changed to the median.</p>
+<blockquote>
+<p>Does this further support the hypothesis of lockdown effect?</p>
+</blockquote>
+<p>We can clearly observe the largest percentage drops happening during the weeks when the national lockdown took place. Thus, this graph further supports our reasoning.</p>
+<p>Finally, a question that you might be asking is why did we use mean bikes hired instead of median?</p>
+<blockquote>
+<p>In order to calculate the expected rentals we used the mean of rented bikes/montly since we thought this was a better measurement. Since the monthly data of the actual rented bikes does not seem to be heavily right/left skewed, the mean is a good tool to calcukate the expected rentals. If the data were heavily skewed, we would have changed to the median.</p>
+</blockquote>
 </div>
