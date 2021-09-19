@@ -6,7 +6,7 @@ description: Nullam et orci eu lorem consdequat tincidunt vivamus et sagittis ma
   massa sed magna lacinia magna pelldfentesque lorem ipsum dolor. Nullam et orci eu
   lorem consequat tincidunt. Vivamus et sagittis tempus.
 draft: no
-image: picjose.jpg
+image: bikes.jpg
 keywords: ''
 slug: challenge_bikes
 categories:
@@ -150,12 +150,3 @@ comparison_bike_w %>%
 Should you use the mean or the median to calculate your expected rentals? Why?
 > In order to calculate the expected rentals we used the mean of rented bikes/montly since we thought this was a better measurement. Since the monthly data of the actual rented bikes does not seem to be heavily right/left skewed, the mean is a good tool to calcukate the expected rentals. If the data were heavily skewed, we would have changed to the median.
 
-# Deliverables
-
-As usual, there is a lot of explanatory text, comments, etc. You do not need these, so delete them and produce a stand-alone document that you could share with someone. Knit the edited and completed R Markdown file as an HTML document (use the "Knit" button at the top of the script editor window) and upload it to Canvas.
-
-# Details
-
-- Who did you collaborate with: Awashti Palak, Kaikati Jeffrey, Laffitte Jose, Opre Valeria, Wang Hanyu, Zhang Jasmine 
-- Approximately how much time did you spend on this problem set: Monday 2h, Wednesday 2h , Thursday 7h, Friday 2h - total of13h
-- What, if anything, gave you the most trouble: Defining the mortality rate has been a challenge for us, and also having to join the dataframes by two variables (countries and years)

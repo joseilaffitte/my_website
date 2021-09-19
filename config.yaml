@@ -88,8 +88,8 @@ params:
         subtitle: My professional experience
         title: My CV
         url: blogs/CV Jose.pdf
-      - image: pic03.jpg
-        subtitle: We got a good grade, so might as well share it :)
+      - image: bike.jpg
+        subtitle: The future of mobility?
         title: Challenge Bikes
         url: blogs/challenge_bikes
       - image: pic04.jpg
