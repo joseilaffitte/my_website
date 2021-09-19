@@ -1,25 +1,27 @@
 ---
-categories:
-- ""
-- ""
-date: "2017-10-31T22:42:51-05:00"
-description: Nullam et orci eu lorem consdequat tincidunt vivamus et sagittis magna
-  sed nunc rhoncus condifdmentum vcvcsem. In efficitur ligula tate urna. Maecenas massa
-  sed magna lacinia magna pelldfentesque lorem ipsum dolor. Nullam et orci eu lorem
-  consequat tincidunt. Vivamus et sagittis tempus.
-draft: false
-image: picjose.jpg
-keywords: ""
-slug: homework
 title: "Look at this beautiful code"
+date: '2017-10-31T22:42:51-05:00'
+description: Nullam et orci eu lorem consdequat tincidunt vivamus et sagittis magna
+  sed nunc rhoncus condifdmentum vcvcsem. In efficitur ligula tate urna. Maecenas
+  massa sed magna lacinia magna pelldfentesque lorem ipsum dolor. Nullam et orci eu
+  lorem consequat tincidunt. Vivamus et sagittis tempus.
+draft: no
+image: picjose.jpg
+keywords: ''
+slug: homework
+categories:
+- ''
+- ''
 ---
 
-```{r, setup, include=FALSE}
+```{r, setup, include=TRUE}
 knitr::opts_chunk$set(
   message = FALSE, 
   warning = FALSE, 
   tidy=FALSE,     # display code as typed
-  size="small")   # slightly smaller font for code
+  size="small", 
+  echo = T,
+  results = "show")   # slightly smaller font for code
 options(digits = 3)
 
 # default figure size
@@ -87,7 +89,7 @@ weather %>%
 1. Convert the dataframe from wide to 'long' format. Hint: use `gather()` or `pivot_longer()` function. Name the new dataframe as `tidyweather`, name the variable containing the name of the month as `month`, and the temperature deviation values as `delta`.
 
 
-```{r tidyweather}
+```{r tidyweather, include=TRUE}
 tidyweather <- weather %>% 
              select(1:13) %>% 
             pivot_longer(cols=2:13,
@@ -481,7 +483,7 @@ boot_email_CI%>%
 1. Would you expect a 99% confidence interval to be wider or narrower than the interval you calculated above? Explain your reasoning.
 
 ```{r}
-Wider. 
+print("Wider.") 
 ```
 
 
