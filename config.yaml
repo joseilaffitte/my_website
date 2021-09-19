@@ -92,9 +92,9 @@ params:
         subtitle: The future of mobility?
         title: Challenge Bikes
         url: blogs/challenge_bikes
-      - image: pic04.jpg
+      - image: growth_.jpg
         subtitle: Do country accurately report their GDP?
-        title: GDP Accuracy Analysis
+        title: GDP Analysis
         url: blogs/gdp
       - image: pic05.jpg
         subtitle: It helps cars move

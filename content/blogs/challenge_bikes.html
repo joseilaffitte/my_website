@@ -1,0 +1,123 @@
+---
+title: Look at this beautiful code
+date: '2017-10-31T22:42:51-05:00'
+description: Nullam et orci eu lorem consdequat tincidunt vivamus et sagittis magna
+  sed nunc rhoncus condifdmentum vcvcsem. In efficitur ligula tate urna. Maecenas
+  massa sed magna lacinia magna pelldfentesque lorem ipsum dolor. Nullam et orci eu
+  lorem consequat tincidunt. Vivamus et sagittis tempus.
+draft: no
+image: bikes.jpg
+keywords: ''
+slug: challenge_bikes
+categories:
+- ''
+- ''
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<div id="challenge-1-excess-rentals-in-tfl-bike-sharing" class="section level1">
+<h1>Challenge 1: Excess rentals in TfL bike sharing</h1>
+<p>Recall the TfL data on how many bikes were hired every single day. We can get the latest data by running the following</p>
+<pre class="r"><code>url &lt;- &quot;https://data.london.gov.uk/download/number-bicycle-hires/ac29363e-e0cb-47cc-a97a-e216d900a6b0/tfl-daily-cycle-hires.xlsx&quot;
+library(disk.frame)
+# Download TFL data to temporary file
+httr::GET(url, write_disk(bike.temp &lt;- tempfile(fileext = &quot;.xlsx&quot;)))</code></pre>
+<pre><code>## Response [https://airdrive-secure.s3-eu-west-1.amazonaws.com/london/dataset/number-bicycle-hires/2021-08-23T14%3A32%3A29/tfl-daily-cycle-hires.xlsx?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAJJDIMAIVZJDICKHA%2F20210919%2Feu-west-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20210919T125441Z&amp;X-Amz-Expires=300&amp;X-Amz-Signature=850ecd10900898639f8b7c82c315cb9bb5057a17b58f1803c5ad7ea09bb2a615&amp;X-Amz-SignedHeaders=host]
+##   Date: 2021-09-19 12:54
+##   Status: 200
+##   Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+##   Size: 173 kB
+## &lt;ON DISK&gt;  C:\Users\Usuario\AppData\Local\Temp\RtmpeUvdWr\file2fc423f33062.xlsx</code></pre>
+<pre class="r"><code># Use read_excel to read it as dataframe
+bike0 &lt;- read_excel(bike.temp,
+                   sheet = &quot;Data&quot;,
+                   range = cell_cols(&quot;A:B&quot;))
+
+# change dates to get year, month, and week
+bike &lt;- bike0 %&gt;% 
+  clean_names() %&gt;% 
+  rename (bikes_hired = number_of_bicycle_hires) %&gt;% 
+  mutate (year = year(day),
+          month = lubridate::month(day, label = TRUE),
+          week = isoweek(day))</code></pre>
+<p>We can easily create a facet grid that plots bikes hired by month and year.</p>
+<pre class="r"><code>knitr::include_graphics(here::here(&quot;images&quot;, &quot;tfl_distributions_monthly.png&quot;), error = FALSE)</code></pre>
+<p><img src="C:/Users/Usuario/Desktop/my_website/images/tfl_distributions_monthly.png" width="100%" style="display: block; margin: auto;" /></p>
+<p>Look at May and Jun and compare 2020 with the previous years. What’s happening?</p>
+<blockquote>
+<p>It becomes clear that the effect of national restrictive measures such as lockdowns have greatly influenced the bikes rent. This helps us explain the difference between the average number of rented bikes in May and June 2020 with previous years.</p>
+</blockquote>
+<pre class="r"><code>actual_bike &lt;- bike %&gt;%
+               filter (year &gt;= 2016) %&gt;%
+               group_by(year,month) %&gt;%
+               summarise(actual = mean(bikes_hired))
+
+expected_bike &lt;- actual_bike %&gt;%
+                 group_by(month) %&gt;%
+                 summarise(expected = mean(actual))
+
+comparison_bike &lt;- left_join(actual_bike, expected_bike, by = &quot;month&quot;)
+
+comparison_bike</code></pre>
+<pre><code>## # A tibble: 67 x 4
+## # Groups:   year [6]
+##     year month actual expected
+##    &lt;dbl&gt; &lt;ord&gt;  &lt;dbl&gt;    &lt;dbl&gt;
+##  1  2016 Jan   18914.   19763.
+##  2  2016 Feb   20608.   21433.
+##  3  2016 Mar   21435    22491.
+##  4  2016 Apr   25444.   27392.
+##  5  2016 May   32699.   33163.
+##  6  2016 Jun   32108.   36618.
+##  7  2016 Jul   38336.   37974.
+##  8  2016 Aug   37368.   34955.
+##  9  2016 Sep   35101.   33994.
+## 10  2016 Oct   30488.   29660.
+## # ... with 57 more rows</code></pre>
+<pre class="r"><code>comparison_bike %&gt;%
+  ggplot(aes(x = month, group = 1)) +
+  geom_line(aes(x = month, y = actual), color = &quot;black&quot;, size = 0.1) +
+  geom_line(aes(x = month, y = expected), color = &quot;blue&quot;, size = 0.8) +
+  geom_ribbon(aes(ymin = expected, ymax = pmin(expected, actual)),fill = &quot;red&quot;, alpha=0.2)  +
+  geom_ribbon(aes(ymin = actual, ymax = pmin(expected, actual)),fill = &quot;green&quot;, alpha=0.2)+
+  facet_wrap(~ year) +
+  theme_bw()+
+  labs(
+    title= &quot;Montly changes in Tfl bikes rentals&quot;,
+    y=&quot;bike rentals&quot;,
+    x=&quot;Months&quot;
+  )</code></pre>
+<p><img src="/blogs/challenge_bikes_files/figure-html/tfl_absolute_monthly_change-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>actual_bike_w &lt;- bike %&gt;%
+               filter (year &gt;= 2016) %&gt;%
+               group_by(year, week) %&gt;%
+               summarise(actual = mean(bikes_hired))
+
+expected_bike_w &lt;- actual_bike_w %&gt;%
+                 group_by(week) %&gt;%
+                 summarise(expected = mean(actual))
+
+comparison_bike_w &lt;- left_join(actual_bike_w, expected_bike_w, by = &quot;week&quot;) %&gt;%
+                     group_by(week) %&gt;%
+                     mutate(dchanges = (actual - expected) / expected )
+
+comparison_bike_w = comparison_bike_w %&gt;%
+  filter(!(year ==2021 &amp; week ==53))</code></pre>
+<pre class="r"><code>comparison_bike_w %&gt;%
+  ggplot(aes(x = week, group = 1)) +
+  geom_line(aes(x = week, y = dchanges, fill = &quot;black&quot;)) +
+  geom_ribbon(aes(ymin = 0, ymax = pmin(0, dchanges)),fill = &quot;red&quot;, alpha=0.2)  +
+  geom_ribbon(aes(ymin = dchanges, ymax = pmin(0, dchanges)),fill = &quot;green&quot;, alpha=0.2)+
+  facet_wrap(~ year) +
+  theme_bw()+
+  labs(
+    title= &quot;Weekly changes in Tfl bikes rentals&quot;,
+    y= &quot;Bikes rentals&quot;,
+    x=&quot;Weeks&quot;
+  )</code></pre>
+<p><img src="/blogs/challenge_bikes_files/figure-html/tfl_absolute_monthly_changemj-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p>Should you use the mean or the median to calculate your expected rentals? Why?
+&gt; In order to calculate the expected rentals we used the mean of rented bikes/montly since we thought this was a better measurement. Since the monthly data of the actual rented bikes does not seem to be heavily right/left skewed, the mean is a good tool to calcukate the expected rentals. If the data were heavily skewed, we would have changed to the median.</p>
+</div>
