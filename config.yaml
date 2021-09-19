@@ -90,20 +90,13 @@ params:
         url: blogs/CV Jose.pdf
       - image: bike.jpg
         subtitle: The future of mobility?
-        title: Challenge Bikes
+        title: Santander Cycles
         url: blogs/challenge_bikes
       - image: growth_.jpg
-        subtitle: Do country accurately report their GDP?
+        subtitle: A deep dive on GDP and its components
         title: GDP Analysis
         url: blogs/gdp
-      - image: pic05.jpg
-        subtitle: It helps cars move
-        title: Wheel
-        url: blogs/ipsum
-      - image: pic06.jpg
-        subtitle: This is worth more than gold
-        title: Time
-        url: blogs/ipsum
+
   two:
     buttonText: Learn More
     enable: yes
@@ -112,6 +105,3 @@ params:
       make a positive impact.\r\n    Thus, I aim to align my professional career with my values.\r\n"
     title: What I stand for
     url: blogs
-    
-    
-

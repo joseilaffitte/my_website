@@ -1,5 +1,5 @@
 ---
-title: Look at this beautiful code
+title: The effects of lockdowns on mobility
 date: '2017-10-31T22:42:51-05:00'
 description: Nullam et orci eu lorem consdequat tincidunt vivamus et sagittis magna
   sed nunc rhoncus condifdmentum vcvcsem. In efficitur ligula tate urna. Maecenas
@@ -57,7 +57,7 @@ The Santander Cycles is a public mobility scheme in the city of London. Its syst
 
 The TfL (Transport for London) provides readily available data on dayly hires of the Santander Cycles. We can get the latest data by running the following script.
 
-```{r, get_tfl_data, cache=TRUE}
+```{r, get_tfl_data, cache=TRUE, echo = T, results = 'hide'}
 
 # Saving URL
 url <- "https://data.london.gov.uk/download/number-bicycle-hires/ac29363e-e0cb-47cc-a97a-e216d900a6b0/tfl-daily-cycle-hires.xlsx"

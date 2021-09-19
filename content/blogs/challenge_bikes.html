@@ -1,5 +1,5 @@
 ---
-title: Look at this beautiful code
+title: The effects of lockdowns on mobility
 date: '2017-10-31T22:42:51-05:00'
 description: Nullam et orci eu lorem consdequat tincidunt vivamus et sagittis magna
   sed nunc rhoncus condifdmentum vcvcsem. In efficitur ligula tate urna. Maecenas
@@ -26,12 +26,6 @@ url &lt;- &quot;https://data.london.gov.uk/download/number-bicycle-hires/ac29363
 
 # Download TFL data to temporary file
 httr::GET(url, write_disk(bike.temp &lt;- tempfile(fileext = &quot;.xlsx&quot;)))</code></pre>
-<pre><code>## Response [https://airdrive-secure.s3-eu-west-1.amazonaws.com/london/dataset/number-bicycle-hires/2021-08-23T14%3A32%3A29/tfl-daily-cycle-hires.xlsx?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAJJDIMAIVZJDICKHA%2F20210919%2Feu-west-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20210919T132942Z&amp;X-Amz-Expires=300&amp;X-Amz-Signature=5492e7636eaa8c1466b69788161393dd13ddee1e96a2b34acf9142ddce49b3fc&amp;X-Amz-SignedHeaders=host]
-##   Date: 2021-09-19 13:29
-##   Status: 200
-##   Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
-##   Size: 173 kB
-## &lt;ON DISK&gt;  C:\Users\Usuario\AppData\Local\Temp\Rtmpiyow5s\file1c30725029fa.xlsx</code></pre>
 <pre class="r"><code># Use read_excel to read it as dataframe
 bike0 &lt;- read_excel(bike.temp,
                    sheet = &quot;Data&quot;,
