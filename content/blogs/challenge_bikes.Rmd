@@ -8,7 +8,7 @@ description: Nullam et orci eu lorem consdequat tincidunt vivamus et sagittis ma
 draft: no
 image: picjose.jpg
 keywords: ''
-slug: homework
+slug: challenge_bikes
 categories:
 - ''
 - ''

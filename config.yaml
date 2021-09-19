@@ -90,8 +90,8 @@ params:
         url: blogs/CV Jose.pdf
       - image: pic03.jpg
         subtitle: We got a good grade, so might as well share it :)
-        title: Homework
-        url: blogs/homework
+        title: Challenge Bikes
+        url: blogs/challenge_bikes
       - image: pic04.jpg
         subtitle: What we all are
         title: Person
