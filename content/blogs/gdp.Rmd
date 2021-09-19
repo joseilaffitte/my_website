@@ -230,17 +230,3 @@ UN_GDP_estimation %>%
 For both Germany and the US, the calculated GDP was higher than the reported GDP from the 1970's to the 2000. This difference was highest in the 70's, of around a 4%, and has steadily decreased over time. Since the 2000's, both countries report a GDP that is consistent with the sum of its components, thus having an almost 0% deviation. 
 
 India on the other hand still has fluctuations on the percentage difference between the reported and calculated GDP. From 1970 until 1990, it reported a lower GDP than its calculated, peaking at a difference of 7.41% in 1979. However, from 1990 until this day, India reports a higher GDP than the sum of its components, except two exceptions in 2007 and 2010. In 2017, the last datapoint available, India's reported GDP was 2% higher than its calculated.
-
-
-
-Finally, we can look at the development of the components of GDP as a percentage of a country's total GDP over time. 
-
-```{r gdp2, echo=FALSE, out.width="100%"}
-knitr::include_graphics(here::here("images", "gdp2.png"), error = FALSE)
-```
-
-> What is this last chart telling us?
-
-In Germany, during the past years, the proportion of their GDP attributed to net exports has increased, while the proportions of all other elements of GDP have decreased. This might be a result of Germany's strong exports in industries such as automobile, driving the economy of the country. The US has seen a steady increase in the proportion of household spending, reducing government expenditure. Lastly, India has seen a sharp increase in the proportion of gross capital formation, with a decrease in household expenditure. This might suggest an entrepreneurial trend among Indians, who prefer to invest capital than to spend it. 
-
-Furthermore, household income is the largest contributor of GDP in all countries, while net exports is the lower. Government expenditure and gross capital formation represent a similar proportion in the US and Germany, while in India gross capital formation appears in a larger proportion. 

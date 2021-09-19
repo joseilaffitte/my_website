@@ -14,22 +14,27 @@ slug: jose
 title: About me
 ---
 
-<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+```{r load-libraries, warning=FALSE, message=FALSE, echo=FALSE}
+library(tidyverse)  # Load ggplot2, dplyr, and all the other tidyverse packages
+library(gapminder)  # gapminder dataset
+library(here)
+library(janitor)
+```
 
+# My Life
 
-<div id="my-life" class="section level1">
-<h1>My Life</h1>
-<p>My name is Jose Laffitte. I was born in Sevilla, Spain, where I lived
+My name is Jose Laffitte. I was born in Sevilla, Spain, where I lived
 most of my life. It is a really beautiful city, and through this
-<a href="https://www.youtube.com/watch?v=AgBS7sIM6I8&amp;t=138s&amp;ab_channel=Enrique%C3%81lex">link</a>
+[link](https://www.youtube.com/watch?v=AgBS7sIM6I8&t=138s&ab_channel=Enrique%C3%81lex)
 you can take a look at it! When I was 16 I did an exchange to the US,
-and at 18 I moved to the Netherlands to complete my university studies.</p>
-<p>I come from a big family. We are 6 siblings in total. We are all very
+and at 18 I moved to the Netherlands to complete my university studies.
+
+I come from a big family. We are 6 siblings in total. We are all very
 close to each other, which made living with them a lot of fun! There was
 never a dull moment in my house growing up! Their names are: - Carlos -
-Felipe - Fernando - Luis - Carlota</p>
-<p>Now I am beggining to write a new chapter in my life, by moving to
+Felipe - Fernando - Luis - Carlota
+
+Now I am beggining to write a new chapter in my life, by moving to
 London and starting the MAM Program with a group of great people! I am
-<strong>very excited</strong> to get started, and can’t wait live great experiences
-with the LBS Community!</p>
-</div>
+**very excited** to get started, and can't wait live great experiences
+with the LBS Community!
