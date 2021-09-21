@@ -60,7 +60,7 @@ params:
   name: Your name
   navigation:
     button1:
-      - name: Learn More
+      - name: Projects
         url: blogs
     #button2:
      # - name: Log In
